@@ -39,12 +39,20 @@ body{
 
 <!------ Include the above in your HEAD tag ---------->
 <div class="text-center">
-<%
-if("blank".equals((String)request.getParameter("msg")))
-out.println("<div class=errortext>Field Blank | Password and Re-Enter Password mismatch.</div>");
-else if("error".equals((String)request.getParameter("msg")))
-out.println("<div class=errortext>Login Already exists.</div>");
+
+       <%
+Class.forName("com.mysql.jdbc.Driver");
+Connection on=DriverManager.getConnection("jdbc:mysql://localhost:3306/udemy","root","manoj123");
+Statement sit=on.createStatement();
+String sQuery = "SELECT * FROM udemy.signup order by id desc limit 1;";
+ResultSet ruk = sit.executeQuery(sQuery);
+int Coow=100;
+while(ruk.next()){
+Coow= ruk.getInt(1);
+}
+
 %>
+<%String type=request.getParameter("type"); %>
 </div>
 <div class="container-fluid	">
         <div class="row centered-form">
@@ -52,18 +60,24 @@ out.println("<div class=errortext>Login Already exists.</div>");
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    		<h3 class="panel-title">Signup here <small>as <%=(String)request.getParameter("type")%></small></h3>
+			    		
 			 			</div>
 			 			<div class="panel-body">
 			    		<form class="txt-center" id="form" name="form" method="get" action="signup">
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+			                            <input type="number" name="id" id="id" class="form-control input-sm" readonly="readonly" value="<%=(Coow+1) %>" placeholder="ID" >
 			    					</div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+			                            <input type="text" name="name" id="first_name" class="form-control input-sm" placeholder="Name">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="number" id="number " class="form-control input-sm" placeholder="PH Number">
 			    					</div>
 			    				</div>
 			    			</div>
@@ -109,8 +123,19 @@ out.println("<div class=errortext>Login Already exists.</div>");
 			    						<input type="Zipcode" name="Zipcode" id="Zipcode" class="form-control input-sm" placeholder="Zipcode">
 			    					</div>
 			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input  name="emprole" id="emprole" class="form-control input-sm" placeholder="emprole">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input  name="empmagcode" id="empmagcode" class="form-control input-sm" placeholder="empmagcode">
+			    					</div>
+			    				</div>
+			    				
 			    			</div>
-			    			
+			    			<input type="hidden" name="type" value="<%=(String)request.getParameter("type")%>" />
 			    			<input type="submit" value="Register" class="btn btn-info btn-block">
 			    		
 			    		</form>
@@ -124,8 +149,34 @@ out.println("<div class=errortext>Login Already exists.</div>");
  <br>
  <br>
 <br></br>
+    <%
+	if("Updated".equals((String)request.getParameter("msg")))
+	out.print("<div align=center class=errortext>Updated Successfully</div>");
+	else if("error".equals((String)request.getParameter("msg")))
+	out.println("<div class=errortext>Login Already exists.</div>");
+	%>
+
+
  <footer class="container-fluid text-center">
-  <p><a href="Loginpage.jsp">Back</a></p>
+  <div class="back" align="center"><input type="button" class="btn btn-secondary" value="Take me back" onclick="return but()"></div>
 </footer>
+<SCRIPT type="text/javascript">
+
+function but(){
+	    n=2;
+	    if("<%=type%>" === "Admin"){
+	    	window.location.href="http://localhost:8080/capstone/admindashboard.jsp";
+	    }else if("<%=type%>" === "Manager"){
+	    	window.location.href="http://localhost:8080/capstone/managerdashboard.jsp";
+	    }else{
+	    	window.location.href="http://localhost:8080/capstone/dummy.jsp";
+	    }
+		
+	
+		
+	
+	
+}
+</SCRIPT>
 </body>   
 </html>

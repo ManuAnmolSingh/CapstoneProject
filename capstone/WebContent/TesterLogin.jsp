@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <style>
      body {
     font-family: "Lato", sans-serif;
@@ -91,6 +92,11 @@
     color: #fff;
 }
 
+<!--loading-->
+
+
+
+
   </style>
 </head>
 <body>
@@ -124,14 +130,65 @@
                      <input type="password" name="Password" class="form-control" placeholder="Password">
                   </div>
                   <button type="submit" class="btn btn-black">Login</button>
-                  <button type="submit" class="btn btn-secondary">Register</button>
+                  <button type="submit" class="btn btn-secondary"><a href="register.jsp">Register</a></button><br>
+                  <a href="#" data-target="#pwdModal" data-toggle="modal">Forgot my password</a>
+                  <input type="hidden" name="type" value="<%=(String)request.getParameter("type")%>" /><br>
+<%
+		if("loginerror".equals((String)request.getParameter("msg")))
+		out.println("<div class=errortext align=center><font color=red>Invalid Login ID or Password.</div>");
+%>
+<br>
+<%      
+        String t=request.getParameter("msg");
+        if(t!=null){
+        	out.println(" "+t+" "); 
+        }
+%> 
+</form>
+                 
                   
+                
+<!--modal-->
+				<div id="pwdModal" class="modal fade" id="hid" tabindex="-1" role="dialog" aria-hidden="true">
+				  <div class="modal-dialog">
+				  <div class="modal-content">
+				      <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				          <h1 class="text-center">What's My Password?</h1>
+				      </div>
+				      <div class="modal-body">
+				          <div class="col-md-12">
+				                <div class="panel panel-default">
+				                    <div class="panel-body">
+				                        <div class="text-center">
+				                          
+				                          <p>If you have forgotten your password you can reset it here.</p>
+				                            <div class="panel-body">
+				                                <div>
+				                                <form action="forgetpassword.jsp"  name="myform" method="post">
+				                                    <div class="form-group">
+				                                        <input class="form-control input-lg" placeholder="E-mail Address" name="email" type="email">
+				                                    </div>
+                                                    <input class="btn btn-lg btn-primary btn-block" value="Send My Password" id="btnFetch" type="submit">
+                                                    <input type="hidden" name="type" value="<%=(String)request.getParameter("type")%>"/>
+				                                </form>
+				                                
+				                                </div>
 
-                  
-
-                          
-                  <input type="hidden" name="type" value="<%=(String)request.getParameter("type")%>" />
-               </form>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>
+				      </div>
+				      <div class="modal-footer">
+				          <div class="col-md-12">
+				             <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+						  </div>	
+				      </div>
+				  </div>
+				  </div>
+				</div>                        
             </div>
          </div>
       </div>

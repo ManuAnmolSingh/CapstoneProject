@@ -154,7 +154,8 @@ if(session.getAttribute("name")==null)
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="bugstatusreport.jsp">View status-report</a>
+  <a href="developerbugreport.jsp?type=Developer">View status-report</a>
+  <a href="developerticket.jsp?type=Developer">developerticket</a>
   <a href="out">Logout</a>
   <a href="contact.jsp">Contact</a>
 </div>
@@ -181,13 +182,13 @@ if(session.getAttribute("name")==null)
   </div>
   <div class="w3-bar w3-black">
     <a href="dummy.jsp" class="w3-bar-item w3-button w3-desktop w3-white">Home</a>
-    <a href="Reportviewstatus.jsp" class="w3-bar-item w3-button w3-desktop">View Projects</a>
+    <a href="readonlyprojectreport.jsp?type=Developer" class="w3-bar-item w3-button w3-desktop">View Projects</a>
     <a href="contact.jsp" class="w3-bar-item w3-button w3-desktop">Contact</a>
     
     <div class="w3-dropdown-hover w3-desktop">
       <button class="w3-button">Dropdown <i class="fa fa-caret-down"></i></button>
       <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
-        <a href="#" class="w3-bar-item w3-button w3-desktop">Link 1</a>
+        <a href="developerbugreport.jsp?type=Developer" class="w3-bar-item w3-button w3-desktop">bugReport</a>
         <a href="#" class="w3-bar-item w3-button w3-desktop">Link 2</a>
         <a href="#" class="w3-bar-item w3-button w3-desktop">Link 3</a>
       </div>
@@ -195,7 +196,7 @@ if(session.getAttribute("name")==null)
     
   </div>
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-  <h1>Retrieve data from database in jsp</h1>
+  <h1>Retrieved data from database</h1>
 <table class="table table-bordered table-striped table-hover" border="1">
 		<thead>
 		   <tr>

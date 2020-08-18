@@ -7,10 +7,16 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.PreparedStatement"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ include file="header.jsp" %>
+
+
 <body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<%String type=request.getParameter("type"); %>
+
     <%
     String driver = "com.mysql.cj.jdbc.Driver";
     String connectionUrl = "jdbc:mysql://localhost:3306/udemy?useSSL=false&serverTimezone=UTC";
@@ -24,6 +30,33 @@
 	connection = DriverManager.getConnection(connectionUrl, userid, password);
 	
     %>
+    <% 
+
+ String t="Updated Successfully";
+ String a=request.getParameter("id");
+ String b=request.getParameter("pm");
+ String c=request.getParameter("cn");
+ String d=request.getParameter("pt");
+ String e=request.getParameter("ptype");
+ String f=request.getParameter("db");
+ String g=request.getParameter("desc");
+ if(a!=null && b!=null && c!=null && d!=null && e!=null && f!=null && g!=null){
+	 String query="update projects set ProjectManager=?, ClientName=?, ProjectTechnology=?, ProjectType=?, DatabaseTech=?, comments=?  where ProjectName='"+a+"'";
+	 stmt =connection.prepareStatement(query);
+	 stmt.setString(1,b);
+	 stmt.setString(2,c);
+	 stmt.setString(3,d);
+	 stmt.setString(4,e);
+	 stmt.setString(5,f);
+	 stmt.setString(6,g);
+	 stmt.executeUpdate();
+	 out.println(t);
+	 
+
+	 
+ }
+ 
+%>
     <form action="" method="post">
        <%
        stat=connection.createStatement();
@@ -61,29 +94,36 @@
        <%
 	    }
        %>
-       <button type="submit" class="btn btn-warning">Update</button>
-       <a href="Reportviewstatus.jsp" class="btn btn-default">Back</a>
-    </form>
+ 
+
+       <button type="submit" class="btn btn-warning" onclick="return upda()">Update</button>
+       
+       <input type="button" class="btn btn-secondary" value="Take me back" onclick="return but()">
+       <SCRIPT type="text/javascript">
+
+function but(){
+	   
+	    if("<%=type%>" === "Admin"){
+	    	window.location.href="http://localhost:8080/capstone/Reportviewstatus.jsp?type=Admin";
+	    }else if("<%=type%>" === "Manager"){
+	    	window.location.href="http://localhost:8080/capstone/Reportviewstatus.jsp?type=Manager";
+	    }else if("<%=type%>" === "Tester"){
+	    	window.location.href="http://localhost:8080/capstone/Reportviewstatus.jsp?type=Tester";
+	    }else if("<%=type%>" === "Developer"){
+	    	window.location.href="http://localhost:8080/capstone/Reportviewstatus.jsp?type=Developer";
+	    }else{
+	    	window.location.href="http://localhost:8080/capstone/dummy.jsp";
+	    }
+		
+	
+		
+	
+	
+}
+</SCRIPT>
+
+</form>
 </body>
 </html>
-<% 
- String a=request.getParameter("id");
- String b=request.getParameter("pm");
- String c=request.getParameter("cn");
- String d=request.getParameter("pt");
- String e=request.getParameter("ptype");
- String f=request.getParameter("db");
- String g=request.getParameter("desc");
- if(a!=null && b!=null && c!=null && d!=null && e!=null && f!=null && g!=null){
-	 String query="update projects set ProjectManager=?, ClientName=?, ProjectTechnology=?, ProjectType=?, DatabaseTech=?, comments=?  where ProjectName='"+a+"'";
-	 stmt =connection.prepareStatement(query);
-	 stmt.setString(1,b);
-	 stmt.setString(2,c);
-	 stmt.setString(3,d);
-	 stmt.setString(4,e);
-	 stmt.setString(5,f);
-	 stmt.setString(6,g);
-	 stmt.executeUpdate();
-	 response.sendRedirect("Reportviewstatus.jsp");
- }
-%>
+
+

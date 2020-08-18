@@ -144,7 +144,7 @@ ResultSet resultSet = null;
 </head>
 <body>
 <% 
-
+response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
 
 if(session.getAttribute("name")==null)
 	response.sendRedirect("DeveloperLogin.jsp");
@@ -154,9 +154,8 @@ if(session.getAttribute("name")==null)
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="bugstatusreport.jsp">View status-report</a>
-  <a href="Testerdasboard.jsp">Report-Bug</a>
-  <a href="#">Logout</a>
+  <a href="bugstatusreportsample.jsp">View status-report</a>
+  <a href="out">Logout</a>
   <a href="contact.jsp">Contact</a>
 </div>
 
@@ -188,8 +187,8 @@ if(session.getAttribute("name")==null)
     <div class="w3-dropdown-hover w3-desktop">
       <button class="w3-button">Dropdown <i class="fa fa-caret-down"></i></button>
       <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
-        <a href="#" class="w3-bar-item w3-button w3-desktop">Link 1</a>
-        <a href="#" class="w3-bar-item w3-button w3-desktop">Link 2</a>
+        <a href="Devloperdashboard.jsp" class="w3-bar-item w3-button w3-desktop">Back to dashboard</a>
+        <a href="solutionstable.jsp" class="w3-bar-item w3-button w3-desktop">Comments</a>
         <a href="#" class="w3-bar-item w3-button w3-desktop">Link 3</a>
       </div>
     </div>
@@ -221,7 +220,7 @@ if(session.getAttribute("name")==null)
 			statement=connection.createStatement();
 		    String u=request.getParameter("u");
 		    int num=Integer.parseInt(u);
-			String sql ="select * from bugreport where id='"+u+"'";
+			String sql ="select * from bugreport where id='"+num+"'";
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
 			%>
@@ -245,17 +244,41 @@ if(session.getAttribute("name")==null)
 			}
 			%>
 		</tbody>
-<tr><td colspan="4">Developer Comments/Solutions</td></tr>
-<tr><td colspan="4">
-<form name="form" method="post" action="addcomment.jsp">
-<textarea cols="60" rows="4" class="inputtext" name="sol"></textarea>
-<input type="hidden" name="bugid" value="<%=(String)request.getParameter("u")%>" />
-
-<input type="hidden" name="developer" value="<%=session.getAttribute("name")%>" /><br /><br />
-<div align="center"><input type="submit" value="Add Your Comment" /></div>
-</form>
-</td></tr>
 </table>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <table class="table">
+ 
+		<tr><td colspan="4">Developer Comments/Solutions</td></tr>
+		<tr><td colspan="4">
+		<form name="form" method="post" action="addcomment.jsp">
+		<textarea cols="60" rows="4" class="inputtext" name="sol"></textarea>
+		<input type="hidden" name="bugid" value="<%=(String)request.getParameter("u")%>" />
+		
+		<input type="hidden" name="developer" value="<%=session.getAttribute("name")%>" /><br /><br />
+		<div align="center"><input type="submit" value="Add Your Comment" /></div>
+		</form>
+		</td></tr>
+	</table>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <table class="table">
+ 
+		<tr><td colspan="4">Developer Comments/Solutions</td></tr>
+		<tr><td colspan="4">
+		<form name="form" method="post" action="editcomment.jsp">
+		<textarea cols="60" rows="4" class="inputtext" name="sol"></textarea>
+		<input type="hidden" name="bugid" value="<%=(String)request.getParameter("u")%>" />
+		
+		<input type="hidden" name="developer" value="<%=session.getAttribute("name")%>" /><br /><br />
+		<div align="center"><input type="submit" value="Edit Your Comment" /></div>
+		</form>
+		</td></tr>
+	</table>
+  </div>
+</div>
+
+
 <table class="table">
 <tr><td >Audit Trail</td></tr>
 <tr bgcolor=#F2F2F2><td>Developer</td><td class="smalltext">Comments</td></tr>

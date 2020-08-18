@@ -54,10 +54,29 @@
 	    }
        %>
        <button type="submit" class="btn btn-warning">Update</button>
-       <a href="table.jsp" class="btn btn-default">Back</a>
+       <input type="button" class="btn btn-secondary" value="Take me back" onclick="return but()">
+       <SCRIPT type="text/javascript">
+<%String type=request.getParameter("type"); %>
+function but(){
+	   
+	    if("<%=type%>" === "Admin"){
+	    	window.location.href="http://localhost:8080/capstone/table.jsp?type=Admin";
+	    }else if("<%=type%>" === "Manager"){
+	    	window.location.href="http://localhost:8080/capstone/table.jsp?type=Manager";
+	    }else{
+	    	window.location.href="http://localhost:8080/capstone/dummy.jsp";
+	    }
+		
+	
+		
+	
+	
+}
+</SCRIPT>
     </form>
 </body>
 </html>
+
 <% 
  String a=request.getParameter("id");
  String b=request.getParameter("ps");
@@ -72,6 +91,7 @@
 	 stmt.setString(3,d);
 	 stmt.setString(4,e);
 	 stmt.executeUpdate();
-	 response.sendRedirect("table.jsp");
+	 RequestDispatcher rd=request.getRequestDispatcher("table.jsp?msg=updated&&type=Manager");
+	 rd.forward(request, response);
  }
 %>

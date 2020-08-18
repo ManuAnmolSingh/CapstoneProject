@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.annotation.Resource;
@@ -114,7 +115,7 @@ public class Manlogin extends HttpServlet {
     				out.println(name);
     			}*/
     		}
-    		catch (Exception exc) {
+        	catch (Exception exc) {
     			exc.printStackTrace();
     		}
         }

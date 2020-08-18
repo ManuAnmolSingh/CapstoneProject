@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +38,8 @@ public class Devlogin extends HttpServlet {
 		ResultSet myRs = null;
 		String name = request.getParameter("UserName");
         String pass = request.getParameter("Password");
+        String t="developer";
+
 
 		
 		try {
@@ -47,7 +50,7 @@ public class Devlogin extends HttpServlet {
 			myStmt = myConn.createStatement();
 			
 			// Step 4:  Execute SQL query
-			myRs = myStmt.executeQuery("select * from login2 where name='"+name+"' and password='"+pass+"'");
+			myRs = myStmt.executeQuery("select * from signup where (name='"+name+"' and password='"+pass+"') and (emprole='"+t+"')");
 			  
 		      
 		      if(myRs.next()) {
@@ -58,8 +61,10 @@ public class Devlogin extends HttpServlet {
 		        
 		        
 		      }else {
-		    	
-		        out.println("Wrong id and password");
+  		    	RequestDispatcher rd=request.getRequestDispatcher("DeveloperLogin.jsp?msg=loginerror");
+    			rd.forward(request, response);
+
+		        
 		      }
 			
 			// Step 5:  Process the result set

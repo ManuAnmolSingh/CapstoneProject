@@ -26,25 +26,24 @@ public class signup extends HttpServlet {
 		Connection myConn = null;
 		Statement myStmt = null;
 		ResultSet myRs = null;
-		String name = request.getParameter("first_name");
-        String last = request.getParameter("last_name");
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
+
         String type=request.getParameter("type");
-		/*String name=(String)request.getParameter("name");
+		
 		String id=(String)request.getParameter("id");
+		String name=(String)request.getParameter("name");
+		String number=(String)request.getParameter("number");
+		String email=(String)request.getParameter("email");
 		String password=(String)request.getParameter("password");
-		String repassword=(String)request.getParameter("repassword");
+		String repassword=(String)request.getParameter("password_confirmation");
 		String address=(String)request.getParameter("address");
 		String city=(String)request.getParameter("city");
 		String state=(String)request.getParameter("state");
 		String country=(String)request.getParameter("country");
-		String email=(String)request.getParameter("email");
-		String number=(String)request.getParameter("number");
+		String zip=(String)request.getParameter("Zipcode");
 		String emprole=(String)request.getParameter("emprole");
 		String empmagcode=(String)request.getParameter("empmagcode");
-		String type=(String)request.getParameter("type");*/
-		if("".equals(name)||"".equals(email)||"".equals(pass)){
+		
+		if("".equals(name)||"".equals(password)){
 			/*if("Tester".equals(type)){
 			RequestDispatcher rd=request.getRequestDispatcher("signup.jsp?msg=blank");
 			rd.forward(request, response);
@@ -61,19 +60,16 @@ public class signup extends HttpServlet {
     			
     			// Step 3:  Create a SQL statements
     			//String sql = "select * from login2";
-                String insertquery = "insert into dum values(?,?,?,?)" ;
+                String insertquery = "insert into udemy.signup values(?,?,?,?,?,?,?,?,?,?,?,?,?)" ;
                 PreparedStatement stmt = myConn.prepareStatement(insertquery);
     			//myStmt = myConn.createStatement();
     			
     			// Step 4:  Execute SQL query
     			//myRs = myStmt.executeQuery
 			    //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/finalproject", "root", "12345qwert");
-                stmt.setString(1, name);
-                stmt.setString(2, last);
-                stmt.setString(3, email);
-                stmt.setString(4, pass);
+
 			    
-			    /*stmt.setString(1,id);
+			    stmt.setString(1,id);
 			    stmt.setString(2,name);
 			    stmt.setString(3,password);
 			    stmt.setString(4,repassword);
@@ -84,36 +80,29 @@ public class signup extends HttpServlet {
 			    stmt.setString(9,email);
 			    stmt.setString(10,number);
 			    stmt.setString(11,emprole);
-			    stmt.setString(12,empmagcode);*/
+			    stmt.setString(12,empmagcode);	    
+			    stmt.setString(13, zip);
 				stmt.executeUpdate();
-			    stmt.close();
+			    
+				
+
+
+			    response.sendRedirect("register.jsp?msg=Updated&&type=Manager");
+
+				
+				stmt.close();
 				myConn.close();
-				out.println("inserted");
-				/*if("Tester".equals(type)){
-					HttpSession session=request.getSession();
-					session.setAttribute("login", "yes");
-					session.setAttribute("type", type);
-					session.setAttribute("user", name);
-					session.setAttribute("loginid", id);
-					RequestDispatcher rd=request.getRequestDispatcher("manager.jsp?msg=added");
-					rd.forward(request, response);
-				}else{
-					RequestDispatcher rd=request.getRequestDispatcher("manager.jsp?msg=added");
-					rd.forward(request, response);
-				}
-				*/	
 			}
 			catch(Exception e){
-				
-				/*if("Tester".equals(type)){
-					RequestDispatcher rd=request.getRequestDispatcher("register.jsp?msg=error");
-					rd.forward(request, response);
-				}else{
-					RequestDispatcher rd=request.getRequestDispatcher("adddeveloper.jsp?msg=error");
-					rd.forward(request, response);
-				}*/
+
 				e.printStackTrace();
-				out.println("someerror");
+				if(type == "Admin"){
+					response.sendRedirect("register.jsp?msg=erroe&&type=Admin");
+			    }else if(type == "Manager"){
+			    	response.sendRedirect("register.jsp?msg=error&&type=Manager");
+			    }else {
+			    	response.sendRedirect("register.jsp?msg=error");
+			    }
 				
 			}
 		}

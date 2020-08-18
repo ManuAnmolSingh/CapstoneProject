@@ -8,27 +8,146 @@
   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<title>Mail details</title>
-		
+  		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<style>
+
+
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+* {
+  box-sizing: inherit;
+  transition-property: all;
+  transition-duration: 0.8s;
+  transition-timing-function: ease;
+}
+body {
+  background: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.btn {
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 45px;
+  margin: 0 0 2em;
+  max-width: 160px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  
+}
+
+.btn-2 {
+  letter-spacing: 0;
+}
+.btn-2:hover, .btn-2:active {
+  letter-spacing: 10px;
+}
+.btn-2:after, .btn-2:before {
+backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0);
+  bottom: 0px;
+  content: " ";
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+.btn-2:hover:after, .btn-2:hover:before {
+  backface-visibility: hidden;
+  border-color: #fff;
+  transition: width 350ms ease-in-out;
+  width: 70%;
+}
+.btn-2:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
+}
+
+	
+	</style>	
 	</head>
 	<body style="background-color:black; color:white">
 
 	
 	
-		<nav class="navbar navbar">
+
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      
-		      <h2><a href="dummy.jsp">Home</a></h2>
+		      <h2><a class="btn btn-2" href="dummy.jsp">Home</a></h2>
 		      
 		    </div>  
 		  </div>
-		</nav>
-		
+
 	
 	<div class="container-fluid">
 	
-	<h3>contact Manager / <a href="Admincontact.jsp">Admin</a></h3>
+	<h3>contact Manager / <a  href="Admincontact.jsp?type=Admin">Admin</a></h3>
 	<br>
 	<form id="contact-form" method="post" action="mailprocess.jsp" role="form">
 
@@ -84,16 +203,18 @@
         	<div class="col-sm-3">
         	</div>
             <div class="col-sm-3">
-                <input type="submit" class="btn btn-success btn-send" value="Send message">
+                <button class="glow-on-hover" type="submit">Submit</button>
+                <input type="hidden" name="type" value="<%=(String)request.getParameter("type")%>" />
             </div>
         
         </div>
         <div class="row">
         <div class="col-sm-3">
         </div>
-            <div class="col">
+            <div class="col-sm-8">
                 <p class="text-muted">
-                    <strong>*</strong> These fields are required .
+                    <strong>*</strong>
+                     These fields are required.
                     
             </div>
         </div>
@@ -101,5 +222,12 @@
 
 </form>
 </div>
+<%      
+        String t=request.getParameter("msg");
+        if(t!=null){
+        out.println("<script>$(document).ready(function(){swal("+t+");});</script>"); 
+        }
+%>
+
 	</body>
 </html>

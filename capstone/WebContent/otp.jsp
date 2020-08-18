@@ -241,7 +241,7 @@ background-color:black
   <!-- Overlay content -->
   <div class="overlay-content">
     <a href="managerdashboard.jsp">Home</a>
-    <a href="otp.jsp">Back</a>
+    <a href="otpindex2.jsp">Back</a>
     <a href="contact.jsp">Contact</a>
     <a href="out">Logout</a>
   </div>
@@ -251,29 +251,20 @@ background-color:black
 <div class="icon-bar">
   <a class="active" onclick="openNav()"><i class="fa fa-home"></i></a>  
 </div>
-<div class="container-fluid">
+
 <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           
           <div class="card-body">
-            <h5 class="card-title text-center bold">Place type your current and new password</h5>
+            <h5 class="card-title text-center">Place your OTP here that was sent to you email</h5>
             
-            <form action="changepassvalidate.jsp" method="post">
+            <form action="otpcompare.jsp" method="post">
               <div class="form-label-group">
-                
-                <input type="password" class="form-control" name="current" >               
-              </div>
-              <div class="form-label-group">
-                
-                <input type="password" class="form-control" name="new" >               
-              </div>
-              <div class="form-label-group">
-                
-                <input type="password" class="form-control" name="confirm" >               
+                <input type="text" class="form-control"  name="otpvalue">               
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Change Password" class="spinner-border">Submit</button>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" class="spinner-border">Submit</button>
               
             </form>
           </div>
@@ -282,14 +273,5 @@ background-color:black
     </div>
 
 </div>
-    <%
-	if("updated".equals((String)request.getParameter("msg"))){
-		out.print("<div align=center class=errortext>Updated Successfully</div>");
-	}else{
-		out.print("<div align=center class=errortext>Not Successfully</div>");
-	}
-	
-    
-	%>
 </body>
 </html>

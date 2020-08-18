@@ -56,6 +56,10 @@
       }
       .row.content {height:auto;} 
     }
+    #ttype1{
+ color:white;
+ background-color: black;
+}
   </style>
 </head>
 <body>
@@ -116,11 +120,11 @@ if(session.getAttribute("name")==null)
 	    <div class="form-group">
 	        <label for="inputPassword3" class="col-lg-4 control-label">Project Type</label>
 	        <div class="col-lg-10">
-	              <select class="form-control" id="ptype" name="ptype">
-	                <option></option>
-				    <option>front-end</option>
-				    <option>back-end</option>
-				    <option>Middleware</option>
+	              <select class="form-control" id="ttype" name="ptype">
+	                <option id="ttype1"></option>
+				    <option id="ttype1">Retail</option>
+				    <option id="ttype1">Banking</option>
+				    <option id="ttype1">Health-care</option>
 				  </select>
 	        </div>
 	    </div>
@@ -139,10 +143,10 @@ if(session.getAttribute("name")==null)
 	        <div class="col-lg-10">
 			  <select class="form-control" id="pmanager" name="pmanager">
 			    <option></option>
-			    <option>Trump</option>
-			    <option>Modi</option>
-			    <option>Putin</option>
-			    <option>Boris Johnson</option>
+			    <option>Modric</option>
+			    <option>Kroos</option>
+			    <option>Hazard</option>
+			    <option>Ramos</option>
 			  </select>
 	        </div>
 	    </div>

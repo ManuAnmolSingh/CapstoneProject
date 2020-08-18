@@ -83,15 +83,7 @@ body{
           <li><a href="#">Page 1-3</a></li>
         </ul>
       </li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 2 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 2-1</a></li>
-          <li><a href="#">Page 2-2</a></li>
-          <li><a href="#">Page 2-3</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Page 3</a></li>
-      <li><a href="#">Page 4</a></li>
+
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="contact.jsp"><span class="glyphicon glyphicon-user"></span> Contact</a></li>
@@ -106,12 +98,11 @@ body{
   <h4>Welcome to E-bug tracker</h4>
   <div class="panel panel-default">
     <div class="panel-body">
-    <button onclick="document.location='register.jsp'" type="button" class="btn btn-primary btn-md">Add user</button>
-	<button onclick="document.location='addproject.jsp'" type="button" class="btn btn-primary btn-md">Add Project</button>
-	<button onclick="document.location='table.jsp'" type="button" class="btn btn-primary btn-md">User Report</button>
-	<button onclick="document.location='Reportviewstatus.jsp'" type="button" class="btn btn-primary btn-md">Project Report</button>
-	<button type="button" class="btn btn-primary btn-md">Bug Report</button>
-	<button onclick="document.location='changepassword.jsp'" type="button" class="btn btn-primary btn-md">Change Password</button>
+    <button onclick="document.location='register.jsp?type=Admin'" type="button" class="btn btn-primary btn-md">Add user</button>
+	<button onclick="document.location='addproject.jsp?type=Admin'" type="button" class="btn btn-primary btn-md">Add Project</button>
+	<button onclick="document.location='table.jsp?type=Admin'" type="button" class="btn btn-primary btn-md">User Report</button>
+	<button onclick="document.location='Reportviewstatus.jsp?type=Admin'" type="button" class="btn btn-primary btn-md">Project Report</button>
+	<button onclick="document.location='otpindex.html?type=Admin'" type="button" class="btn btn-primary btn-md">Change Password</button>
 	<button onclick="document.location='logout.jsp?type=Admin'" type="button" class="btn btn-primary btn-md">Logout</button>
     </div>
     

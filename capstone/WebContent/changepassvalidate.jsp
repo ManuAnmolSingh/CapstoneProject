@@ -6,6 +6,7 @@ String currentPassword=request.getParameter("current");
 String Newpass=request.getParameter("new");
 String conpass=request.getParameter("confirm");
 String connurl = "jdbc:mysql://localhost:3306/udemy";
+Object n=session.getAttribute("name");
 Connection con=null;
 String pass="";
 int id=0;
@@ -13,23 +14,24 @@ try{
 Class.forName("com.mysql.jdbc.Driver");
 con = DriverManager.getConnection(connurl, "root", "manoj123");
 Statement st=con.createStatement();
-ResultSet rs=st.executeQuery("select * from signup where password='"+currentPassword+"'");
+ResultSet rs=st.executeQuery("select * from signup where password='"+currentPassword+"' and name='"+n+"'");
 while(rs.next()){
 id=rs.getInt(1);
 pass=rs.getString(3);
 } System.out.println(id+ " "+pass);
 if(pass.equals(currentPassword)){
 Statement st1=con.createStatement();
-int i=st1.executeUpdate("update login set password='"+Newpass+"' where id='"+id+"'");
+int i=st1.executeUpdate("update login set password='"+Newpass+"' where id='"+id+"' and name='"+n+"'");
 
 out.println("Password changed successfully");
 
 st1.close();
 con.close();
-response.sendRedirect("admindashboard.jsp");
+response.sendRedirect("changepassword.jsp?msg=updated");
 }
 else{
-out.println("Invalid Current Password");
+response.sendRedirect("changepassword.jsp?msg=");
+
 }
 }
 catch(Exception e){

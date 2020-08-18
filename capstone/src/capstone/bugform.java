@@ -2,6 +2,7 @@ package capstone;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 import javax.annotation.Resource;
 import javax.servlet.*;
@@ -26,16 +27,20 @@ public class bugform extends HttpServlet {
 		Connection myConn = null;
 		Statement myStmt = null;
 		ResultSet myRs = null;
+		
 		int bugid = Integer.parseInt(request.getParameter("bugid"));
 		String bugtitle = request.getParameter("bugtitle");
         String projectcode = request.getParameter("projectcode");
         String tickettype = request.getParameter("tickettype");
         String datetype = request.getParameter("datetype");
+        
 		String descriptio=request.getParameter("descriptio");
 		String bughours=request.getParameter("bughours");
 		String empcode=request.getParameter("empcode");
 		String ticketstatus=request.getParameter("ticketstatus");
         String duedate=request.getParameter("duedate");
+        
+        
 		/*String password=(String)request.getParameter("password");
 		String repassword=(String)request.getParameter("repassword");
 		String address=(String)request.getParameter("address");

@@ -21,17 +21,18 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 
+
   <script>
 
 	    $(function () {
+	    	
 	        $('#datetimepicker1').datetimepicker();
 	        $('#datetimepicker2').datetimepicker({
 	            useCurrent: false //Important! See issue #1075
@@ -48,19 +49,13 @@
  
  
   <style>
-  #ecode1,#tstatus1{
- color:white;
- background-color: black;
-}
-#ttype1{
- color:white;
- background-color: black;
-}
 
   body {
   font-family: "Lato", sans-serif;
 }
-
+.datetimepicker1{
+background-color:black;
+}
 .sidenav {
   height: 100%;
   width: 0;
@@ -81,6 +76,17 @@
   color: #818181;
   display: block;
   transition: 0.3s;
+}
+#ttype1{
+ color:white;
+ background-color: black;
+}
+#ecode1,#tstatus1{
+ color:white;
+ background-color: black;
+}
+
+
 }
 
 .sidenav a:hover {
@@ -146,78 +152,6 @@
     
  /*our-team-main*/
  
-.our-team-main
-{
-	width:100%;
-	height:auto;
-	border-bottom:5px #323233 solid;
-	background:#fff;
-	text-align:center;
-	border-radius:10px;
-	overflow:hidden;
-	position:relative;
-	transition:0.5s;
-	margin-bottom:28px;
-}
-
-
-.our-team-main img
-{
-	border-radius:50%;
-	margin-bottom:20px;
-	width: 90px;
-}
-
-.our-team-main h3
-{
-	font-size:20px;
-	font-weight:700;
-}
-
-.our-team-main p
-{
-	margin-bottom:0;
-}
-
-.team-back
-{
-	width:100%;
-	height:auto;
-	position:absolute;
-	top:0;
-	left:0;
-	padding:5px 15px 0 15px;
-	text-align:left;
-	background:#fff;
-	
-}
-
-.team-front
-{
-	width:100%;
-	height:auto;
-	position:relative;
-	z-index:10;
-	background:green;
-	padding:15px;
-	bottom:0px;
-	transition: all 0.5s ease;
-}
-
-.our-team-main:hover .team-front
-{
-	bottom:-200px;
-	transition: all 0.5s ease;
-}
-
-.our-team-main:hover
-{
-	border-color:#777;
-	transition:0.5s;
-}
-
-
-
 
 
  
@@ -226,12 +160,6 @@
 </head>
 <body>
 
-<% 
-response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
-
-if(session.getAttribute("name")==null)
-	response.sendRedirect("TesterLogin.jsp");
-%>
        <%
 Class.forName("com.mysql.jdbc.Driver");
 Connection on=DriverManager.getConnection("jdbc:mysql://localhost:3306/udemy","root","manoj123");
@@ -246,10 +174,11 @@ Coow= ruk.getInt(1);
 %>
 
 
+
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="bugstatusreportsample.jsp?type=Tester">View status-report</a>
-  <a href="Testerdasboard.jsp">Report-Bug</a>
+  <a href="Devloperdashboard.jsp">back</a>
+  <a href="developerticket.jsp">developerticket</a>
   <a href="out">Logout</a>
   <a href="contact.jsp">Contact</a>
 </div>
@@ -272,30 +201,28 @@ Coow= ruk.getInt(1);
   </div>
   <div class="w3-bar w3-black">
     <a href="dummy.jsp" class="w3-bar-item w3-button w3-desktop w3-white">Home</a>
-    <a href="readonlyprojectreport.jsp?type=Tester" class="w3-bar-item w3-button w3-desktop">View Projects</a>
     <a href="contact.jsp" class="w3-bar-item w3-button w3-desktop">Contact</a>
     
     <div class="w3-dropdown-hover w3-desktop">
-      <button class="w3-button">Dropdown <i class="fa fa-caret-down"></i></button>
+      <button class="w3-button">Dropdown<i class="fa fa-caret-down"></i></button>
       <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
-        <a href="#" class="w3-bar-item w3-button w3-desktop">Link 1</a>
-        <a href="#" class="w3-bar-item w3-button w3-desktop">Link 2</a>
-        <a href="#" class="w3-bar-item w3-button w3-desktop">Link 3</a>
+        <a href="About.jsp" class="w3-bar-item w3-button w3-desktop">About</a>
+        <a href="Profile.jsp" class="w3-bar-item w3-button w3-desktop">Profile</a>
       </div>
     </div>
     
   </div>
 
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-  <div class="container-fluid text-center">    
-  <div class="row centered-form">
+  <div class="container text-center">    
+  <div class="row">
   
     <form class="txt-center" id="form" name="form" method="get" action="bugform">
      
       <h3>Bug-Report Form</h3>
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <div class="form-group">
-	        <label for="inputEmail3" class="col-lg-4 control-label">Bugid</label>
+	        <label for="inputEmail3" class="col-lg-3 control-label">Bugid</label>
 	        <div class="col-lg-10">
 	            <input type="text" class="form-control" id="bid" name="bugid" readonly="readonly" value="<%=(Coow+1) %>">
 	        </div>
@@ -317,9 +244,9 @@ Coow= ruk.getInt(1);
 	        <div class="col-lg-10">
 	              <select class="form-control" id="ttype" name="tickettype">
 	                <option id="ttype1"></option>
-				    <option id="ttype1">Retail</option>
-				    <option id="ttype1">Health-care</option>
-				    <option id="ttype1">Banking</option>
+				    <option id="ttype1">front-end</option>
+				    <option id="ttype1">back-end</option>
+				    <option id="ttype1">Middleware</option>
 				  </select>
 	        </div>
 	    </div>
@@ -331,17 +258,18 @@ Coow= ruk.getInt(1);
                      <span class="glyphicon glyphicon-calendar"></span>
                      </span>
                   </div>
+                  
         </div>
 	    
 		<div class="form-group">
-		  <label for="comment" class="col-lg-2 control-label">Description</label>
+		  <label for="comment" class="col-lg-4 control-label">Description</label>
 		  <div class="col-lg-10">
 		  <textarea class="form-control" rows="5" id="descriptio" name="descriptio"></textarea>
 		  </div>
 		</div>
 		
 	  </div>
-	  <div class="col-lg-4">
+	  <div class="col-lg-6">
 	    <div class="form-group">
 	        <label for="inputPassword3" class="col-lg-4 control-label">Bug Hours</label>
 	        <div class="col-lg-10">
@@ -353,10 +281,10 @@ Coow= ruk.getInt(1);
 	        <div class="col-lg-10">
 			  <select class="form-control" id="ecode" name="empcode">
 			    <option id="ecode1"></option>
-			    <option id="ecode1">Modric</option>
-			    <option id="ecode1">Hazard</option>
-			    <option id="ecode1">Ramos</option>
-			    <option id="ecode1">Kroos</option>
+			    <option id="ecode1">Trump</option>
+			    <option id="ecode1">Modi</option>
+			    <option id="ecode1">Putin</option>
+			    <option id="ecode1">Boris Johnson</option>
 			  </select>
 	        </div>
 	    </div>
@@ -366,13 +294,12 @@ Coow= ruk.getInt(1);
 			  <select class="form-control" id="tstatus" name="ticketstatus">
 			    <option id="tstatus1"></option>
 			    <option id="tstatus1">opened</option>
-			    <option id="tstatus1">on hold</option>
 			    <option id="tstatus1">closed</option>
 			  </select>
 	        </div>
 	    </div>
 	    <div class="form-group">
-                  <label class="col-lg-4 control-label">Due Date</label>
+                  <label class="col-lg-3 control-label">Due Date</label>
                   <div class='col-lg-10 input-group date' id='datetimepicker2'>
                      <input type='text' class="form-control" name="duedate"/>
                      <span class="input-group-addon">
@@ -381,153 +308,24 @@ Coow= ruk.getInt(1);
                   </div>
         </div>
      </div>   
-     <div class="col-lg-4">
-       <%
-String op="opened";
-Class.forName("com.mysql.jdbc.Driver");
-Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/udemy","root","manoj123");
-Statement st=con.createStatement();
-String strQuery = "SELECT COUNT(*) FROM bugreport where ticketstatus='"+op+"'";
-ResultSet rs = st.executeQuery(strQuery);
-String Countrow="";
-if(rs.next()){
-Countrow = rs.getString(1);
-}
-%>
-	<div class="container-fluid">
-	<div class="row">
-	
-	<!--team-1-->
-	<div class="col">
-	<div class="our-team-main">
-	
-	<div class="team-front bg-primary">
-	<img src="http://placehold.it/110x110/pink/fff?text=<%=Countrow%>" class="img-fluid" />
-	<h3>Total Number of</h3>
-	<p>Tickets in open state</p>
-	</div>
-	
-	<div class="team-back">
-	<span>
-	you can see all the ticket id's here:<br>
-	<%
-Class.forName("com.mysql.jdbc.Driver");
-Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/udemy","root","manoj123");
-Statement stt=conn.createStatement();
-String strQuerys = "SELECT id FROM bugreport  where ticketstatus='"+op+"'";
-ResultSet rss = stt.executeQuery(strQuerys);
-String Counrow="";
-while(rss.next()){
-Counrow = rss.getString(1);
-out.println(Counrow);
-}
-%>
-	</span>
-	</div>
-	
-    </div>
-    </div>
-    <div class="w-100"></div>
-    	<!--team-2-->
-        	<%
-        	String oh="on hold";
-        	Class.forName("com.mysql.jdbc.Driver");
-Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/udemy","root","manoj123");
-Statement stat=connection.createStatement();
-String strquery = "SELECT COUNT(*) AS rowcount FROM bugreport where ticketstatus='"+oh+"'";
-ResultSet rsu = stat.executeQuery(strquery);
-
-String Countrows="";
-if(rsu.next()){
-Countrows= rsu.getString(1);
-}
-%>
-	<div class="col">
-	<div class="our-team-main">
-	
-	<div class="team-front bg-warning">
-	<img src="http://placehold.it/110x110/pink/fff?text=<%=Countrows%>" class="img-fluid" />
-	<h3>Total Number of</h3>
-	<p>Tickets on hold</p>
-	</div>
-	
-	<div class="team-back">
-	<span>
-	you can see all the ticket id's here:<br>
-	<%
-Class.forName("com.mysql.jdbc.Driver");
-Connection onhold=DriverManager.getConnection("jdbc:mysql://localhost:3306/udemy","root","manoj123");
-Statement sthold=onhold.createStatement();
-String stqhold = "SELECT id FROM bugreport  where ticketstatus='"+oh+"'";
-ResultSet rshold = sthold.executeQuery(stqhold);
-String counrowhold="";
-while(rshold.next()){
-	counrowhold = rshold.getString(1);
-out.println(counrowhold);
-}
-%>
-	</span>
-	</div>
-	
-    </div>
-    </div>
-    <div class="w-100"></div>
-    	<%
-    	String cl="closed";
-Class.forName("com.mysql.jdbc.Driver");
-Connection cun=DriverManager.getConnection("jdbc:mysql://localhost:3306/udemy","root","manoj123");
-Statement stats=cun.createStatement();
-String sqs = "SELECT COUNT(*) AS rowcount FROM bugreport where ticketstatus='"+cl+"'";
-ResultSet rsus = stats.executeQuery(sqs);
-String Crs="";
-if(rsus.next()){
-Crs = rsus.getString(1);
-}
-%>
-    <div class="col">
-	<div class="our-team-main">
-	
-	<div class="team-front bg-danger text-white" >
-	<img src="http://placehold.it/110x110/pink/fff?text=<%=Crs%>" class="img-fluid" />
-	<h3>Total Number of</h3>
-	<p>Tickets closed</p>
-
-	</div>
-	
-	<div class="team-back">
-	<span>
-	you can see all the ticket id's here:<br>
-	<%
-Class.forName("com.mysql.jdbc.Driver");
-Connection closed=DriverManager.getConnection("jdbc:mysql://localhost:3306/udemy","root","manoj123");
-Statement stclose=closed.createStatement();
-String stqclosed = "SELECT id FROM bugreport  where ticketstatus='"+cl+"'";
-ResultSet rsclose = stclose.executeQuery(stqclosed);
-String counrowclose="";
-while(rsclose.next()){
-	counrowclose = rsclose.getString(1);
-out.println(counrowclose);
-}
-%>
-
-	</span>
-	</div>
-	
-    </div>
-    </div>
-	</div>
-	</div>
      </div>
-    <button type="submit" class="btn btn-warning">Update</button>  
+     
+    <button type="submit" class="btn btn-warning">Update</button> <br>
+    <br> 
     <input class="btn btn-primary" type="reset" value="Reset"><br>
     <%
 	if("added".equals((String)request.getParameter("msg")))
-	out.print("<div align=center class=errortext>New ticket created</div>");
+	out.print("<div align=center class=errortext>Tester added</div>");
 	%>
-    </form>
+     </form>
+
     </div>
-  </div>
-  </div>
+    </div>
+	</div>
+
+
+
+
 
 
 <script>

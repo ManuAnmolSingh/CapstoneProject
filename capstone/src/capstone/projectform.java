@@ -69,12 +69,15 @@ public class projectform extends HttpServlet {
     			//myRs = myStmt.executeQuery
 			    //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/finalproject", "root", "12345qwert");
                 stmt.setString(1, name);
-                stmt.setString(2, clientname);
-                stmt.setString(3, projecttype);
-                stmt.setString(4, description);
-                stmt.setString(5, projectmanager);
-                stmt.setString(6, projecttech);
-                stmt.setString(7, databasetech);
+                stmt.setString(2, projectmanager);
+                stmt.setString(3, clientname);
+                stmt.setString(4, projecttech);
+                stmt.setString(5, projecttype);
+                stmt.setString(6, databasetech);
+                stmt.setString(7, description);
+                
+                
+                
 			    
 			    /*stmt.setString(1,id);
 			    stmt.setString(2,name);

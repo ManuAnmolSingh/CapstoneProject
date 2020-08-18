@@ -23,7 +23,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <a href="Loginpage.jsp?type=Manager" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Manager</a>
     <a href="DeveloperLogin.jsp?type=Developer" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Developer</a>
     <a href="TesterLogin.jsp?type=Tester" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Tester</a>
-    <a href="contact.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"style="float: right">Contact</a>
+    <a href="contact.jsp?type=contact" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"style="float: right">Contact</a>
     <a href="Loginpage.jsp?type=Admin" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"style="float: right">Admin</a>
   </div>
 
@@ -40,8 +40,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <!-- Header -->
 <header class="w3-container w3-black w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">Issue Tracking Tool</h1>
-  <p class="w3-xlarge">Web App</p>
-  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
+  <p class="w3-xlarge">Web Application</p>
+  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top"><a href="Aboutus.jsp">About us</a></button>
 </header>
 
 <!-- First Grid -->

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.sql.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,7 +10,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
   h4 {
     border-bottom: 1px solid #000000;
 }
@@ -32,6 +34,7 @@ color: white;
       background-color: #555;
       color: white;
       padding: 15px;
+      text-align: center;
     }
     
     /* On small screens, set height to 'auto' for sidenav and grid */
@@ -60,38 +63,90 @@ body{
     border-radius: 10px;
     width:70%;    //Specify your width here
 }
+.container {
+    margin-top: 30px
+}
+
+.counter-box {
+    display: block;
+    background: #f6f6f6;
+    padding: 40px 20px 37px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+.counter-box p {
+    margin: 5px 0 0;
+    padding: 0;
+    color: #909090;
+    font-size: 18px;
+    font-weight: 500;
+    
+}
+
+.counter-box i {
+    font-size: 60px;
+    margin: 0 0 15px;
+    color: #d2d2d2
+}
+
+.counter {
+    display: block;
+    font-size: 32px;
+    font-weight: 700;
+    color: #666;
+    line-height: 28px
+}
+
+.counter-box.colored {
+    background: rgba(0,0,255,0.3);
+}
+
+.counter-box.coloreds {
+    background: rgba(255,255,0,0.3);
+}
+.counter-box.coloredss {
+    background:rgba(0,255,0,0.3);
+}
+
+
+.counter-box.colored p,
+.counter-box.colored i,
+.counter-box.colored .counter {
+    color: #fff
+}
   </style>
 </head>
 <body>
+<% 
+response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
 
+if(session.getAttribute("name")==null)
+	response.sendRedirect("Loginpage.jsp?type=Manager");
+	
+	%>
 <div class="container-fluid">
   <div class="page-header">
-    <h3>E-bug Tracking System</h3>      
-    <p>Manage project track online</p>
+	    
+	      <h2>E-Bug Tracking System</h2>
+	      <p>Manage Project and Track bugs online</p>
+	    
 
+  </div>
+  <div class="col-lg-8 text-right text-white-50"><h4><%if (session != null) {
+	    		         if (session.getAttribute("name") != null) {
+	    		            String name = (String) session.getAttribute("name");
+	    		            out.print("Welcome Manager, " + name +"");
+	    		         } 
+	    		      }%></h4></div>
   </div>    
 </div>
 <nav class="navbar navbar-inverse navbar-center">
   <div class="container-fluid">
    
     <ul class="nav navbar-nav">
-      <li class="w3-bar-item w3-button w3-padding-large w3-white w3-hover-white"><a href="dummy.jsp">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="register.jsp">Add User</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
+      <li class="w3-bar-item w3-button w3-padding-large w3-white w3-hover-white"><a href="dummy.jsp">Home</a>
       </li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 2 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 2-1</a></li>
-          <li><a href="#">Page 2-2</a></li>
-          <li><a href="#">Page 2-3</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Page 3</a></li>
-      <li><a href="#">Page 4</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="contact.jsp"><span class="glyphicon glyphicon-user"></span> Contact</a></li>
@@ -101,16 +156,15 @@ body{
   </div>
 </nav>
 
-
 <div class="container">
   <h4>Welcome to E-bug tracker</h4>
   <div class="panel panel-default">
     <div class="panel-body">
-    <button onclick="document.location='register.jsp'" type="button" class="btn btn-primary btn-md">Add user</button>
-	<button onclick="document.location='table.jsp'" type="button" class="btn btn-primary btn-md">User Report</button>
-	<button onclick="document.location='Reportviewstatus.jsp'" type="button" class="btn btn-primary btn-md">Project Report</button>
-	<button onclick="document.location='bugstatusreport.jsp'" type="button" class="btn btn-primary btn-md">Bug Report</button>
-	<button onclick="document.location='changepassword.jsp'" type="button" class="btn btn-primary btn-md">Change Password</button>
+    <button onclick="document.location='register.jsp?type=Manager'" type="button" class="btn btn-primary btn-md">Add user</button>
+	<button onclick="document.location='table.jsp?type=Manager'" type="button" class="btn btn-primary btn-md">User Report</button>
+	<button onclick="document.location='Reportviewstatus.jsp?type=Manager'" type="button" class="btn btn-primary btn-md">Project Report</button>
+	<button onclick="document.location='developerbugreport.jsp?type=Manager'" type="button" class="btn btn-primary btn-md">Bug Report</button>
+	<button onclick="document.location='otpindex2.jsp?type=Manager'" type="button" class="btn btn-primary btn-md">Change Password</button>
 	<button onclick="document.location='logout.jsp?type=Manager'" type="button" class="btn btn-primary btn-md">Logout</button>
     </div>
     
@@ -119,8 +173,15 @@ body{
 </div>
 
 
-<footer class="container-fluid text-center">
-  <p>Nothing</p>
-</footer>
+<footer class="w3-container w3-center">  
+  <div class="w3-xlarge w3-padding-32">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+ </div>
+ </footer>
 </body>
 </html>

@@ -11,7 +11,7 @@
 
 //String id = request.getParameter("userid");
 String driver = "com.mysql.cj.jdbc.Driver";
-String connectionUrl = "jdbc:mysql://aa1wd6h5x5putvn.cvo6brwtrbg1.ca-central-1.rds.amazonaws.com/udemy?useSSL=false&serverTimezone=UTC";
+String connectionUrl = "jdbc:mysql://localhost:3306/udemy?useSSL=false&serverTimezone=UTC";
 
 String userid = "root";
 String password = "manoj123";
@@ -33,7 +33,7 @@ ResultSet resultSet = null;
 <html>
 
 <head>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -163,18 +163,20 @@ h2 {
 	response.sendRedirect("Loginpage.jsp");
 	%>
 
-<h1><span class="yellow">User-Report</pan></h1>
+<h1> <span class="yellow">Project-Report</pan></h1>
 <h2>Table</h2>
 <h1>Retrieve data from database in jsp</h1>
 <table class="container">
 		<thead>
 		   <tr>
-		     <th><h1>id</h1></th>
-		     <th><h1>password</h1></th>
-		     <th><h1>name</h1></th>
-		     <th><h1>email</h1></th>
-		     <th><h1>username</h1></th>
-		     <th class="text-center"><h1>Action</h1></th>
+		     <th><h1>ProjectName</h1></th>
+		     <th><h1>ProjectManager</h1></th>
+		     <th><h1>ClientName</h1></th>
+		     <th><h1>ProjectTechnology</h1></th>
+		     <th><h1>ProjectType</h1></th>
+		     <th><h1>Database</h1></th>
+		     <th><h1>Description</h1></th>
+		     
 		   </tr>
 		
 		</thead>
@@ -183,19 +185,19 @@ h2 {
 			try{
 			connection = DriverManager.getConnection(connectionUrl, userid, password);
 			statement=connection.createStatement();
-			String sql ="select * from login";
+			String sql ="select * from projects";
 			resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
 			%>
 			<tr>
-			<td><%=resultSet.getString("id") %></td>
-			<td><%=resultSet.getString("password") %></td>
-			<td><%=resultSet.getString("name") %></td>
-			<td><%=resultSet.getString("email") %></td>
-			<td><%=resultSet.getString("username") %></td>
-			<td>
-		          <a href="edit.jsp?u=<%=resultSet.getString("id") %>&&type=<%=type %>" class="btn btn-warning">Edit</a>	
-			</td>
+			<td><%=resultSet.getString("ProjectName") %></td>
+			<td><%=resultSet.getString("ProjectManager") %></td>
+			<td><%=resultSet.getString("ClientName") %></td>
+			<td><%=resultSet.getString("ProjectTechnology") %></td>
+			<td><%=resultSet.getString("ProjectType") %></td>
+			<td><%=resultSet.getString("DatabaseTech") %></td>
+			<td><%=resultSet.getString("comments") %></td>
+
 			</tr>
 			<%
 			}
@@ -207,11 +209,7 @@ h2 {
 		</tbody>
 </table>
 <br>
-    <%
-	if("updated".equals((String)request.getParameter("msg")))
-	out.print("<div align=center class=errortext>Updated Successfully</div>");
-    
-	%>
+
 <br>
 <div class="back" align="center"><input type="button" class="btn btn-secondary" value="Take me back" onclick="return but()"></div>
 
@@ -223,13 +221,13 @@ function but(){
 	    	window.location.href="http://localhost:8080/capstone/admindashboard.jsp";
 	    }else if("<%=type%>" === "Manager"){
 	    	window.location.href="http://localhost:8080/capstone/managerdashboard.jsp";
+	    }else if("<%=type%>" === "Tester"){
+	    	window.location.href="http://localhost:8080/capstone/Testerdasboard.jsp";
+	    }else if("<%=type%>" === "Developer"){
+	    	window.location.href="http://localhost:8080/capstone/Devloperdashboard.jsp";
 	    }else{
 	    	window.location.href="http://localhost:8080/capstone/dummy.jsp";
 	    }
-		
-	
-		
-	
 	
 }
 </SCRIPT>
